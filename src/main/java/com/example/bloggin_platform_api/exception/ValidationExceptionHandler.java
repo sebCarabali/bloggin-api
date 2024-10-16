@@ -1,6 +1,5 @@
 package com.example.bloggin_platform_api.exception;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
