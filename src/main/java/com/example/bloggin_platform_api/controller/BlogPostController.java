@@ -15,6 +15,8 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/api/post")
@@ -28,5 +30,11 @@ public class BlogPostController {
     public ResponseEntity<BlogPostResponseDTO> create(
             @Valid @RequestBody BlogPostRequestDTO createPostRequest) {
         return new ResponseEntity<>(blogPostService.create(createPostRequest), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<BlogPostResponseDTO> putMethodName(@PathVariable("id") Long id,
+            @Valid @RequestBody BlogPostRequestDTO updateRequestDTO) {
+        return new ResponseEntity<>(blogPostService.update(id,updateRequestDTO), HttpStatus.OK);
     }
 }

@@ -6,4 +6,6 @@ import com.example.bloggin_platform_api.dto.BlogPostResponseDTO;
 public interface BlogPostService {
 
     BlogPostResponseDTO create(BlogPostRequestDTO request);
+
+    BlogPostResponseDTO update(Long id, BlogPostRequestDTO updateRequestDTO);
 }

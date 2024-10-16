@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @ControllerAdvice
 @Slf4j
-public class ValidationExceptionHandler {
+public class BlogPostExceptionHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -23,5 +23,16 @@ public class ValidationExceptionHandler {
         var errors = ex.getFieldErrors().stream()
                 .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(GlobalBlogginPlatformException.class)
+    public ResponseEntity<ErrorResponse> handleException(GlobalBlogginPlatformException ex) {
+        var er = new ErrorResponse(
+            ex.getMessage(),
+            ex.getStatus(),
+            ex.getStatusText()
+        );
+        return new ResponseEntity<>(er, HttpStatus.valueOf(ex.getStatus()));
     }
 }
