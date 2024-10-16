@@ -36,4 +36,10 @@ public class DefaultBlogPostService implements BlogPostService {
         return blogPostMapper.mapToCreateResponse(blog);
     }
 
+    @Override
+    public void delete(Long id) {
+        BlogPost blog = blogPostRepository.findById(id).orElseThrow(() -> new BlogPostNotFoundException());
+        blogPostRepository.delete(blog);
+    }
+
 }

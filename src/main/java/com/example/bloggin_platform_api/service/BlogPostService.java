@@ -8,4 +8,6 @@ public interface BlogPostService {
     BlogPostResponseDTO create(BlogPostRequestDTO request);
 
     BlogPostResponseDTO update(Long id, BlogPostRequestDTO updateRequestDTO);
+
+    void delete(Long id);
 }

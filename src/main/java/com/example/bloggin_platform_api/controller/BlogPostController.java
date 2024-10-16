@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
@@ -33,8 +34,14 @@ public class BlogPostController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BlogPostResponseDTO> putMethodName(@PathVariable("id") Long id,
+    public ResponseEntity<BlogPostResponseDTO> update(@PathVariable("id") Long id,
             @Valid @RequestBody BlogPostRequestDTO updateRequestDTO) {
         return new ResponseEntity<>(blogPostService.update(id,updateRequestDTO), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+        blogPostService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
